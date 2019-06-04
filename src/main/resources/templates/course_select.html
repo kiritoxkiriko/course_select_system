@@ -1,0 +1,151 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>选课系统</title>
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="javascript:void(0) "><span class="glyphicon glyphicon-user"></span><span th:text="' '+${student.name}"></span></a></li>
+            <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> 注销</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <h2 class="text-center">选课系统</h2>
+    <div class="container main" th:study_program_id="${studyProgram.id}">
+        <div class="alert alert-dismissable alert-warning" th:unless="${studyProgram.submit}">
+            <button type="button" class="close" data-dismiss="alert"
+                    aria-hidden="true">
+                &times;
+            </button>
+            学习计划未提交
+        </div>
+        <div class="alert alertalert-dismissable alert-success" th:if="${studyProgram.submit}">
+            <button type="button" class="close" data-dismiss="alert"
+                    aria-hidden="true">
+                &times;
+            </button>
+            学习计划已提交
+        </div>
+        <table class="table table-hover">
+            <caption>可选课程</caption>
+            <thead>
+            <tr>
+                <th class="col-md-2">课程名称</th>
+                <th class="col-md-1">专业</th>
+                <th class="col-md-1">讲师</th>
+                <th class="col-md-1">周次</th>
+                <th class="col-md-2">时间</th>
+                <th class="col-md-1">学分</th>
+                <th class="col-md-1">费用</th>
+                <th class="col-md-1">已选/全部</th>
+                <th class="col-md-2">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="c:${courseOffering.courses}">
+                <th class="col-md-2" th:text="${c.name}"></th>
+                <th class="col-md-1" th:text="${c.college.name}"></th>
+                <th class="col-md-1" th:text="${c.professor.name}"></th>
+                <th class="col-md-1" th:text="${c.beginWeek+'-'+c.finishWeek+' 周'}"></th>
+                <th class="col-md-2"><span th:each="str:${weekStrsList.get(cStat.index)}"
+                                           th:text="${str+' '}"></span><span
+                        th:text="${c.beginWeek+'-'+c.finishWeek+' 节'}"></span></th>
+                <th class="col-md-1" th:text="${c.score}"></th>
+                <th class="col-md-1" th:text="${c.price}"></th>
+                <th class="col-md-1" th:text="${c.selectNum+'/'+10}"></th>
+                <th class="col-md-2">
+                    <button th:course_id="${c.id}" type="button" class="btn btn-primary btn-small btn-primary-add "
+                            style="margin-right: 10px">主选
+                    </button>
+                    <button th:if="${courseOffering.status==1&&studyProgram.submit==false}" th:course_id="${c.id}" type="button" class="btn btn-info btn-small btn-secondary-add">备选
+                    </button>
+                </th>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table table-hover">
+            <caption>主选课程</caption>
+            <!--            <thead>-->
+            <!--            <tr>-->
+            <!--                <th class="col-md-2">课程名称</th>-->
+            <!--                <th class="col-md-1">专业</th>-->
+            <!--                <th class="col-md-1">讲师</th>-->
+            <!--                <th class="col-md-1">周次</th>-->
+            <!--                <th class="col-md-2">时间</th>-->
+            <!--                <th class="col-md-1">学分</th>-->
+            <!--                <th class="col-md-1">费用</th>-->
+            <!--                <th class="col-md-1">已选/全部</th>-->
+            <!--                <th class="col-md-2">操作</th>-->
+            <!--            </tr>-->
+            <!--            </thead>-->
+            <tbody>
+            <tr th:each="c:${studyProgram.primaryCourses}">
+                <th class="col-md-2" th:text="${c.name}"></th>
+                <th class="col-md-1" th:text="${c.college.name}"></th>
+                <th class="col-md-1" th:text="${c.professor.name}"></th>
+                <th class="col-md-1" th:text="${c.beginWeek+'-'+c.finishWeek+' 周'}"></th>
+                <th class="col-md-2"><span th:each="str:${weekStrsList.get(cStat.index)}"
+                                           th:text="${str+' '}"></span><span
+                        th:text="${c.beginWeek+'-'+c.finishWeek+' 节'}"></span></th>
+                <th class="col-md-1" th:text="${c.score}"></th>
+                <th class="col-md-1" th:text="${c.price}"></th>
+                <th class="col-md-1" th:text="${c.selectNum+'/'+10}"></th>
+                <th class="col-md-2" style="">
+                    <button th:if="${courseOffering.status==1&&studyProgram.submit==false}" th:course_id="${c.id}" type="button" class="btn btn-danger btn-small btn-primary-delete">
+                        删除
+                    </button>
+                </th>
+            </tr>
+            </tbody>
+        </table>
+        <table th:if="${courseOffering.status==1}" class="table table-hover">
+            <caption>备选课程</caption>
+            <!--            <thead>-->
+            <!--            <tr>-->
+            <!--                <th class="col-md-2">课程名称</th>-->
+            <!--                <th class="col-md-1">专业</th>-->
+            <!--                <th class="col-md-1">讲师</th>-->
+            <!--                <th class="col-md-1">周次</th>-->
+            <!--                <th class="col-md-2">时间</th>-->
+            <!--                <th class="col-md-1">学分</th>-->
+            <!--                <th class="col-md-1">费用</th>-->
+            <!--                <th class="col-md-1">已选/全部</th>-->
+            <!--                <th class="col-md-2">操作</th>-->
+            <!--            </tr>-->
+            <!--            </thead>-->
+            <tbody>
+            <tr th:each="c:${studyProgram.secondaryCourses}">
+                <th class="col-md-2" th:text="${c.name}"></th>
+                <th class="col-md-1" th:text="${c.college.name}"></th>
+                <th class="col-md-1" th:text="${c.professor.name}"></th>
+                <th class="col-md-1" th:text="${c.beginWeek+'-'+c.finishWeek+' 周'}"></th>
+                <th class="col-md-2"><span th:each="str:${weekStrsList.get(cStat.index)}"
+                                           th:text="${str+' '}"></span><span
+                        th:text="${c.beginWeek+'-'+c.finishWeek+' 节'}"></span></th>
+                <th class="col-md-1" th:text="${c.score}"></th>
+                <th class="col-md-1" th:text="${c.price}"></th>
+                <th class="col-md-1" th:text="${c.selectNum+'/'+10}"></th>
+                <th class="col-md-2">
+                    <button th:if="${courseOffering.status==1&&studyProgram.submit==false}" th:course_id="${c.id}" type="button" class="btn btn-danger btn-small btn-secondary-delete">
+                        删除
+                    </button>
+                </th>
+            </tr>
+            </tbody>
+        </table>
+        <button type="button" th:unless="${studyProgram.submit}" class="btn-submit btn btn-primary">提交</button>
+        <button type="button" th:if="${studyProgram.submit}" class="btn btn-default disabled">已提交</button>
+    </div>
+</div>
+<script src="/js/course_select.js"></script>
+</body>
+</html>

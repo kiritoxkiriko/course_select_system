@@ -1,0 +1,113 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>管理页面</title>
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="javascript:void(0) "><span class="glyphicon glyphicon-user"></span><span
+                    th:text="${' '+registrar.name}"></span></a></li>
+            <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> 注销</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <h2 class="text-center">管理页面</h2>
+    <div class="main">
+        <div class="col-lg-6">
+            <table class="table table-hover">
+                <caption>学生列表</caption>
+                <thead>
+                <tr>
+                    <th class="col-lg-1">学号</th>
+                    <th class="col-lg-1">姓名</th>
+                    <th class="col-lg-1">密码</th>
+                    <th class="col-lg-1">专业</th>
+                    <th class="col-lg-2">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="s:${students}">
+                    <th th:text="${s.id}"></th>
+                    <th th:text="${s.name}"></th>
+                    <th th:text="${s.password}"></th>
+                    <th th:college_id="${s.college.id}" th:text="${s.college.name}"></th>
+                    <th>
+                        <button class="btn btn-danger btn-small btn-stu-delete" th:stu_id="${s.id}">删除</button>
+                    </th>
+                </tr>
+                <tr>
+                    <form id="form-stu">
+                        <th class="col-lg-1"><input class="form-control" type="number" name="id" placeholder="学号"></th>
+                        <th class="col-lg-1"><input class="form-control " type="text" name="name" placeholder="姓名"></th>
+                        <th class="col-lg-1"><input class="form-control" type="password" name="pwd" placeholder="密码"></th>
+                    <th class="col-lg-1 select">
+                        <div class="form-group form-inline">
+                        <select name="college_id" class="form-control">
+                            <option class="option-stu" th:each="c:${colleges}" th:value="${c.id}" th:text="${c.name}"
+                                    th:selected="${cStat.index==0?'selected':''}"></option>
+                        </select>
+                        </div>
+                    </th>
+                    <th class="col-lg-2">
+                        <button class="btn btn-primary btn-small btn-stu-add">添加或修改</button>
+                    </th>
+                    </form>
+                </tr>
+            </table>
+        </div>
+        <div class="col-lg-6">
+            <table class="table table-hover">
+                <caption>教师</caption>
+                <thead>
+                <tr>
+                    <th class="col-lg-1">编号</th>
+                    <th class="col-lg-1">姓名</th>
+                    <th class="col-lg-1">密码</th>
+                    <th class="col-lg-1">专业</th>
+                    <th class="col-lg-2">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="s:${professors}">
+                    <th  th:text="${s.id}"></th>
+                    <th th:text="${s.name}"></th>
+                    <th th:text="${s.password}"></th>
+                    <th th:college_id="${s.college.id}" th:text="${s.college.name}"></th>
+                    <th>
+                        <button class="btn btn-danger btn-small btn-pro-delete" th:pro_id="${s.id}">删除</button>
+                    </th>
+                </tr>
+                <tr>
+                    <form id="form-pro">
+                        <th class="col-lg-1"><input class="form-control" type="number" name="id" placeholder="编号"></th>
+                        <th class="col-lg-1"><input class="form-control " type="text" name="name" placeholder="姓名"></th>
+                        <th class="col-lg-1"><input class="form-control" type="password" name="pwd" placeholder="密码"></th>
+                        <th class="col-lg-1 select">
+                            <div class="form-group form-inline col-lg-1 ">
+                                <select name="college_id" class="form-control col-lg-1">
+                                    <option class="option-pro" th:each="c:${colleges}" th:value="${c.id}" th:text="${c.name}"
+                                            th:selected="${cStat.index==0?'selected':''}"></option>
+                                </select>
+                            </div>
+                        </th>
+                        <th class="col-lg-2">
+                            <button type="submit" class="btn btn-primary btn-small btn-pro-add">添加或修改</button>
+                        </th>
+                    </form>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="/js/registrar.js"></script>
+</body>
+</html>

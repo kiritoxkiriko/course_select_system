@@ -1,0 +1,52 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>选课系统</title>
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="javascript:void(0) "><span class="glyphicon glyphicon-user"></span><span th:text="${''+student.name}"></span></a></li>
+            <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> 注销</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <h2 class="text-center">学生页面</h2>
+    <div class="container">
+        <table class="table table-hover">
+            <caption>课程计划</caption>
+            <thead>
+            <tr>
+                <th>专业</th>
+                <th>学位</th>
+                <th>开课时间</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="co:${courseOfferingList}">
+                <td th:text="${co.degree.college.name}"></td>
+                <td th:text="${co.degree.name}"></td>
+                <td th:text="${co.expireDate}"></td>
+                <td th:if="${co.status==0}" th:text="非当前学期"></td>
+                <td th:if="${co.status==1}" th:text="开放选课"></td>
+                <td th:if="${co.status==2}" th:text="停止选课"></td>
+                <td th:if="${co.status==1}" ><a class="btn btn-primary btn-small" th:href="@{~/student(co_pos=${coStat.index})}">选课</a></td>
+                <td th:if="${co.status==2}"><button type="button" class="btn btn-primary btn-small" th:href="@{~/student(co_pos=${coStat.index})}">修改</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>

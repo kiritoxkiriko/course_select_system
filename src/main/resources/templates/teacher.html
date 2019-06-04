@@ -1,0 +1,77 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>教师页面</title>
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="javascript:void(0) "><span class="glyphicon glyphicon-user"></span><span th:text="${professor.name}"></span></a></li>
+            <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> 注销</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <h2 class="text-center">教师页面</h2>
+    <div class="container">
+        <table class="table table-hover">
+            <caption>全部课程</caption>
+            <thead>
+            <tr>
+                <th class="col-md-2">课程名称</th>
+                <th class="col-md-1">专业</th>
+                <th class="col-md-1">讲师</th>
+                <th class="col-md-1">周次</th>
+                <th class="col-md-2">时间</th>
+                <th class="col-md-1">学分</th>
+                <th class="col-md-1">费用</th>
+                <th class="col-md-1">已选/全部</th>
+                <th class="col-md-2">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="c:${courses}">
+                <th class="col-md-2" th:text="${c.name}"></th>
+                <th class="col-md-1" th:text="${c.college.name}"></th>
+                <th class="col-md-1" th:text="${c.professor.name}"></th>
+                <th class="col-md-1" th:text="${c.beginWeek+'-'+c.finishWeek+' 周'}"></th>
+                <th class="col-md-2"><span th:each="str:${weekStrsList.get(cStat.index)}"
+                                           th:text="${str+' '}"></span><span
+                        th:text="${c.beginWeek+'-'+c.finishWeek+' 节'}"></span></th>
+                <th class="col-md-1" th:text="${c.score}"></th>
+                <th class="col-md-1" th:text="${c.price}"></th>
+                <th class="col-md-1" th:text="${c.selectNum+'/'+10}"></th>
+                <th class="col-md-2">
+                </th>
+            </tr>
+        </table>
+        <table class="table table-hover">
+            <caption>教学课程</caption>
+            <tbody>
+            <tr th:each="c:${coursesCanOpen}">
+                <th class="col-md-2" th:text="${c.name}"></th>
+                <th class="col-md-1" th:text="${c.college.name}"></th>
+                <th class="col-md-1" th:text="${c.professor.name}"></th>
+                <th class="col-md-1" th:text="${c.beginWeek+'-'+c.finishWeek+' 周'}"></th>
+                <th class="col-md-2"><span th:each="str:${canOpenWeekStrsList.get(cStat.index)}"
+                                           th:text="${str+' '}"></span><span
+                        th:text="${c.beginWeek+'-'+c.finishWeek+' 节'}"></span></th>
+                <th class="col-md-1" th:text="${c.score}"></th>
+                <th class="col-md-1" th:text="${c.price}"></th>
+                <th class="col-md-1" th:text="${c.selectNum+'/'+10}"></th>
+                <th class="col-md-2">
+                    <a class="btn btn-primary btn-small" th:href="@{~/professor(co_pos=${cStat.index})}">查看学生</a>
+                </th>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
