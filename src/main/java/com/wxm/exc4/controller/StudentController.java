@@ -1,6 +1,5 @@
 package com.wxm.exc4.controller;
 
-import com.wxm.exc4.annotation.AutoJump;
 import com.wxm.exc4.annotation.StudentLoginRequire;
 import com.wxm.exc4.entity.*;
 import com.wxm.exc4.service.*;
@@ -9,10 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.Action;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,10 +48,10 @@ public class StudentController {
             model.addAttribute(courseOffering);
             model.addAttribute("weekStrsList",weekStrsList);
             model.addAttribute(studyProgram);
-            return "course_select";
+            return "student/course_select";
         }else{
             model.addAttribute(courseOfferings);
-            return "student";
+            return "student/student";
         }
     }
 }

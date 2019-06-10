@@ -31,6 +31,9 @@ public class Course {
     private List<Course> requireCourses=new ArrayList<>();
     @Column
     private int selectNum = 0;
+    @NotNull
+    @Column
+    private int totalNum=10;
     @Column
     @NotNull
     private double price;
@@ -54,12 +57,13 @@ public class Course {
     public Course() {
     }
 
-    public Course(@NotNull College college, @NotNull Professor professor, @NotNull String name, @NotNull double score, List<Course> requireCourses, @NotNull double price, @NotNull int beginWeek, @NotNull int finishWeek, @NotNull String daysOfWeek, @NotNull int beginTime, @NotNull int finishTime) {
+    public Course(@NotNull College college, @NotNull Professor professor, @NotNull String name, @NotNull double score, List<Course> requireCourses, @NotNull int totalNum, @NotNull double price, @NotNull int beginWeek, @NotNull int finishWeek, @NotNull String daysOfWeek, @NotNull int beginTime, @NotNull int finishTime) {
         this.college = college;
         this.professor = professor;
         this.name = name;
         this.score = score;
         this.requireCourses = requireCourses;
+        this.totalNum = totalNum;
         this.price = price;
         this.beginWeek = beginWeek;
         this.finishWeek = finishWeek;
@@ -171,6 +175,14 @@ public class Course {
 
     public void setDaysOfWeek(String daysOfWeek) {
         this.daysOfWeek = daysOfWeek;
+    }
+
+    public int getTotalNum() {
+        return totalNum;
+    }
+
+    public void setTotalNum(int totalNum) {
+        this.totalNum = totalNum;
     }
 
     @Override

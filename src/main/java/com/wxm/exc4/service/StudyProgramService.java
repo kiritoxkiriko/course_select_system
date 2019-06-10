@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Service
 public class StudyProgramService {
-    public static final int MAX_PRIMARY_COURSE_NUM = 4;
+    public static final int  MAX_PRIMARY_COURSE_NUM= 4;
     public static final int MAX_SECONDARY_COURSE_NUM = 2;
     @Autowired
     private StudentDao studentDao;
@@ -189,7 +189,7 @@ public class StudyProgramService {
 
     public synchronized boolean canAddPrimaryCourse(StudyProgram studyProgram) {
         List<Course> courses = studyProgram.getPrimaryCourses();
-        return courses.size() < MAX_PRIMARY_COURSE_NUM;
+        return courses.size() < studyProgram.getCourseOffering().getMaxSelectNum();
     }
 
     public synchronized boolean canAddSecondaryCourse(StudyProgram studyProgram) {

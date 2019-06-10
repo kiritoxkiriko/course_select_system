@@ -1,49 +1,87 @@
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>登录</title>
-    <script src="/js/jquery-3.4.1.min.js"></script>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <script src="/js/bootstrap.min.js"></script>
-</head>
-<body>
-<div class="container">
-    <h2 class="text-center">登录</h2>
-    <form class="container" method="post" action="/login">
-        <div class="alert alert-danger" th:unless="${message==null}" th:text="${message}"></div>
-        <div class="form-group">
-            <label for="id">用户编号:</label>
-            <input type="number" class="form-control" id="id" name="id" placeholder="用户编号(数字)" th:value="${tempId}">
-        </div>
-        <div class="form-group">
-            <label for="pwd">密码:</label>
-            <input type="password" class="form-control" id="pwd" name="pwd" placeholder="密码">
-        </div>
-        <div th:if="${tempType==null}"class="form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="type" value="student" checked="checked">&nbsp;学生
-            </label>
-            <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="type" value="professor">&nbsp;教授
-            </label>
-            <label class="form-check-label">
-                <input class="" type="radio" name="type" value="registrar">&nbsp;管理员
-            </label>
-        </div>
-        <div th:unless="${tempType==null}" class="form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="type" value="student" th:checked="${tempType.equals('student')?'checked':''}">&nbsp;学生
-            </label>
-            <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="type" value="professor" th:checked="${tempType.equals('professor')?'checked':''}">&nbsp;教授
-            </label>
-            <label class="form-check-label">
-                <input class="" type="radio" name="type" value="registrar" th:checked="${tempType.equals('registrar')?'checked':''}">&nbsp;管理员
-            </label>
-        </div>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <button type="submit" class="btn btn-primary">登录</button>
-    </form>
-</div>
-</body>
+    <title>欢迎登陆教务系统</title>
+
+    <!-- Bootstrap -->
+    <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="/vendors/animate.css/animate.min.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="/build/css/custom.min.css" rel="stylesheet">
+  </head>
+
+  <body class="login">
+    <div>
+      <a class="hiddenanchor" id="signup"></a>
+      <a class="hiddenanchor" id="signin"></a>
+
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <div class="alert alert-danger" th:unless="${message==null}" th:text="${message}"></div>
+          <section class="login_content">
+            <form action="/login" method="post">
+              <h1>Login Form</h1>
+
+              <div class="form-group">
+                <input type="text" class="form-control" name="id" id="id" placeholder="ID" required="" />
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" name="pwd"id="pwd" placeholder="密码" required="" />
+              </div>
+              <div class="form-group">
+                <select name="type" class="form-control">
+                  <option class="option-stu" value="student" selected="selected">学生</option>
+                  <option class="option-stu" value="professor" >老师</option>
+                  <option class="option-stu" value="registrar" >教务</option>
+                  <option class="option-stu" value="student" >机房</option>
+                </select>
+              </div>
+<!--              <div th:if="${tempType==null}"class="form-check-inline">-->
+<!--                <label class="form-check-label">-->
+<!--                  <input class="form-check-input" type="radio" name="type" value="student" checked="checked">&nbsp;学生-->
+<!--                </label>-->
+<!--                <label class="form-check-label">-->
+<!--                  <input class="form-check-input" type="radio" name="type" value="professor">&nbsp;教授-->
+<!--                </label>-->
+<!--                <label class="form-check-label">-->
+<!--                  <input class="" type="radio" name="type" value="registrar">&nbsp;管理员-->
+<!--                </label>-->
+<!--              </div>-->
+<!--              <div th:unless="${tempType==null}" class="form-check-inline">-->
+<!--                <label class="form-check-label">-->
+<!--                  <input class="form-check-input" type="radio" name="type" value="student" th:checked="${tempType.equals('student')?'checked':''}">&nbsp;学生-->
+<!--                </label>-->
+<!--                <label class="form-check-label">-->
+<!--                  <input class="form-check-input" type="radio" name="type" value="professor" th:checked="${tempType.equals('professor')?'checked':''}">&nbsp;老师-->
+<!--                </label>-->
+<!--                <label class="form-check-label">-->
+<!--                  <input class="" type="radio" name="type" value="registrar" th:checked="${tempType.equals('registrar')?'checked':''}">&nbsp;管理员-->
+<!--                </label>-->
+<!--              </div>-->
+              <div >
+                <input class="btn btn-default submit" value="登录" type="submit">
+                <a class="reset_pass" href="#">忘记密码?</a>
+              </div>
+
+
+              <div class="clearfix"></div>
+
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

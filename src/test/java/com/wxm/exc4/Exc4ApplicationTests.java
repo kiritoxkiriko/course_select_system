@@ -57,15 +57,19 @@ public class Exc4ApplicationTests {
         Professor professor=professorService.add(111,"滑稽","123456",college);
         //
         List<Course> courses=new ArrayList<>();
-        courses.add(new Course(college,professor,"高等数学",6,null,10,1,16,"1 3",1,2));
-        courses.add(new Course(college,professor,"线性代数",6,null,10,1,16,"1 3",1,2));
-        courses.add(new Course(college,professor,"java基础",6,null,10,1,16,"1 3",5,6));
-        courses.add(new Course(college,professor,"python基础",6,null,10,3,10,"2 4",3,4));
-        courses.add(new Course(college,professor,"数据结构",6,null,10,5,5,"3 5",3,4));
-        courses.add(new Course(college,professor,"c语言",6,null,10,1,16,"1 3",7,8));
-        courses.add(new Course(college,professor,"数据库",6,null,10,1,16,"1 3",3,4));
+        courses.add(new Course(college,professor,"高等数学",6,null,10,10,1,16,"1 3",1,2));
+        courses.add(new Course(college,professor,"线性代数",6,null,10,10,1,16,"1 3",1,2));
+        courses.add(new Course(college,professor,"java基础",6,null,10,10,1,16,"1 3",5,6));
+        courses.add(new Course(college,professor,"python基础",6,null,10,10,3,10,"2 4",3,4));
+        courses.add(new Course(college,professor,"数据结构",6,null,10,10,5,5,"3 5",3,4));
+        courses.add(new Course(college,professor,"c语言",6,null,10,10,1,16,"1 3",7,8));
+        courses.add(new Course(college,professor,"数据库",6,null,10,10,1,16,"1 3",3,4));
         courseDao.saveAll(courses);
-//        courses=courseDao.findAll();
+        List<Course> courses1=new ArrayList<>();
+        courses1.add(courseService.getCourseById(1));
+        courses.add(new Course(college,professor,"数据库1",6,courses,10,10,1,16,"1 3",3,4));
+        courseDao.saveAll(courses);
+        //        courses=courseDao.findAll();
         //
         Time time=new Time(System.currentTimeMillis()+1000*60*10);//当前时间+10min
         CourseOffering courseOffering=new CourseOffering(degree,courses,time);

@@ -75,10 +75,10 @@ public class CourseService {
         return false;
     }
     public boolean isFull(Course course){
-        return course.getSelectNum()>= MAX_SELECT_NUM;
+        return course.getSelectNum()>= course.getTotalNum();
     }
     public boolean canOpen(Course course){
-        return course.getSelectNum()>= MIN_SELECT_NUM;
+        return course.getSelectNum()>= course.getTotalNum();
     }
     public List<String> getDaysOfWeekStrs(Course course){
         List<String> result=new ArrayList<>();

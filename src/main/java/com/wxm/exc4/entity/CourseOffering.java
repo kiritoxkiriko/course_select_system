@@ -30,6 +30,8 @@ public class CourseOffering {
     @NotNull
     private int status=BEGIN;
     @Column
+    private int maxSelectNum=4;
+    @Column
     @NotNull
     private Date expireDate;
 
@@ -80,6 +82,14 @@ public class CourseOffering {
 
     public void setExpireDate(Date expireDate) {
         this.expireDate = expireDate;
+    }
+
+    public int getMaxSelectNum() {
+        return maxSelectNum;
+    }
+
+    public void setMaxSelectNum(int maxSelectNum) {
+        this.maxSelectNum = maxSelectNum;
     }
 
     @Override
