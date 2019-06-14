@@ -4,7 +4,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -25,9 +24,6 @@ public class StudyProgram {
     private List<Course> primaryCourses=new ArrayList<>();
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Course> secondaryCourses=new ArrayList<>();
-    @Column
-    @OneToMany
-    private Map scoreMap;
     @Column
     @NotNull
     private boolean submit=false;
