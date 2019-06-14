@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.wxm</groupId>
-    <artifactId>exc4</artifactId>
+    <artifactId>pt</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>exc4</name>
+    <name>pt</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
