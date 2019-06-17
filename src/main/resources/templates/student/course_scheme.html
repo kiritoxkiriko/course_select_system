@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>学生选课系统</title>
+    <title>学生选课系统-课程表</title>
 
     <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -53,7 +53,7 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> 选课系统 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="/student">课程计划</a></li>
+                      <li><a href="/student">课程表</a></li>
                     </ul>
                   </li>
 
@@ -115,66 +115,39 @@
                     <p>选课小工具</p>
 
                     <!-- start project list -->
-                    <table class="table table-striped projects">
+                    <table class="table table-bordered projects">
                       <thead>
                         <tr>
-                          <th style="width: 1%">#</th>
-                          <th style="width: 20%">专业</th>
-                          <th>学位</th>
-                          <th>开课时间</th>
-                          <th>Status</th>
-                          <th style="width: 20%">操作</th>
+                          <th class="bg-warning">周次</th>
+                          <th colspan="1" class="bg-warning">第1节</th>
+                          <th colspan="1" class="bg-warning">第2节</th>
+                          <th colspan="1" class="bg-warning">第3节</th>
+                          <th colspan="1" class="bg-warning">第4节</th>
+                          <th colspan="1" class="bg-warning">第5节</th>
+                          <th colspan="1" class="bg-warning">第6节</th>
+                          <th colspan="1" class="bg-warning">第7节</th>
+                          <th colspan="1" class="bg-warning">第8节</th>
+                          <th colspan="1" class="bg-warning">第9节</th>
+                          <th colspan="1" class="bg-warning">第10节</th>
                         </tr>
                       </thead>
                       <tbody>
-<!--                        <tr>-->
-<!--                          <td>#</td>-->
-<!--                          <td>-->
-<!--                            <a>Pesamakini Backend UI</a>-->
-<!--                            <br />-->
-<!--                            <small>Created 01.01.2015</small>-->
-<!--                          </td>-->
-<!--                          <td>-->
-<!--                            <ul class="list-inline">-->
-<!--                              <li>-->
-<!--                                <img src="images/user.png" class="avatar" alt="Avatar">-->
-<!--                              </li>-->
-<!--                              <li>-->
-<!--                                <img src="images/user.png" class="avatar" alt="Avatar">-->
-<!--                              </li>-->
-<!--                              <li>-->
-<!--                                <img src="images/user.png" class="avatar" alt="Avatar">-->
-<!--                              </li>-->
-<!--                              <li>-->
-<!--                                <img src="images/user.png" class="avatar" alt="Avatar">-->
-<!--                              </li>-->
-<!--                            </ul>-->
-<!--                          </td>-->
-<!--                          <td class="project_progress">-->
-<!--                            <div class="progress progress_sm">-->
-<!--                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="57"></div>-->
-<!--                            </div>-->
-<!--                            <small>57% Complete</small>-->
-<!--                          </td>-->
-<!--                          <td>-->
-<!--                            <button type="button" class="btn btn-success btn-xs">Success</button>-->
-<!--                          </td>-->
-<!--                          <td>-->
-<!--                            <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>-->
-<!--                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>-->
-<!--                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>-->
-<!--                          </td>-->
-<!--                        </tr>-->
-                        <tr th:each="co:${courseOfferingList}">
-                          <td th:text="${coStat.index+1}"></td>
-                          <td th:text="${co.degree.college.name}"></td>
-                          <td th:text="${co.degree.name}"></td>
-                          <td th:text="${co.expireDate}"></td>
-                          <td th:if="${co.status==0}" ><button type="button" class="btn btn-warning btn-xs ">非当前学期</button></td>
-                          <td th:if="${co.status==1}" ><button type="button" class="btn btn-success btn-xs ">开放选课</button></td>
-                          <td th:if="${co.status==2}" ><button type="button" class="btn btn-danger btn-xs ">停止选课</button></td>
-                          <td th:if="${co.status==1}" ><a class="btn btn-success btn-xs" th:href="@{~/student(co_pos=${coStat.index})}">选课</a></td>
-                          <td th:if="${co.status==2}"><a type="button" class="btn btn-primary btn-xs" th:href="@{~/student(co_pos=${coStat.index})}">修改</a></td>
+                        <tr th:each="cs:${courseScheme}">
+                          <th th:text="${weekStrs[csStat.index]}" class="bg-success"></th>
+                          <th th:each="c:${cs}" th:colspan="${c==null}?'1':(${c.finishTime+1}-${c.beginTime})" th:if="${c!=courseTemp}" th:class="${c==null}?'':'bg-info'">
+                            <div th:if="${c!=null}">
+                              <span th:text="${c.name}"></span> <br/>
+                              <span th:text="'第'+${c.beginWeek}+'周 - 第'+${c.finishWeek}+'周'"></span> <br/>
+                              <span th:text="'教师: '+${c.professor.name}"></span> <br/>
+                              <span th:text="${c.location}"></span> <br/>
+                            </div>
+                            <div th:unless="${c!=null}">
+                              <br/>
+                              <br/>
+                              <br/>
+                              <br/>
+                            </div>
+                          </th>
                         </tr>
                       </tbody>
                     </table>

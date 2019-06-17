@@ -2,8 +2,10 @@ package com.wxm.pt.controller;
 
 import com.wxm.pt.annotation.TeacherLoginRequire;
 import com.wxm.pt.entity.Course;
+import com.wxm.pt.entity.CourseInfo;
 import com.wxm.pt.entity.Professor;
 import com.wxm.pt.entity.Student;
+import com.wxm.pt.service.CourseInfoService;
 import com.wxm.pt.service.CourseService;
 import com.wxm.pt.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Alex Wang
@@ -27,6 +30,8 @@ public class ProfessorController {
     private CourseService courseService;
     @Autowired
     private StudentService studentService;
+    @Autowired
+    private CourseInfoService courseInfoService;
 
     @TeacherLoginRequire
     @RequestMapping("")
@@ -38,9 +43,11 @@ public class ProfessorController {
         if(coPos!=null&&coPos<coursesCanOpen.size()&&coPos>=0){
             Course course=coursesCanOpen.get(coPos);
             List<Student> students=studentService.getStudentsBySelectCourseId(course.getId());
+            Map<Student, CourseInfo> courseInfoMap=courseInfoService.getCourseInfoMapByCourse(course);
             model.addAttribute("course",course);
             model.addAttribute("students",students);
-            return "student_list";
+            model.addAttribute("courseInfoMap",courseInfoMap);
+            return "teacher/student_list";
         }else{
             List<List<String>> weekStrsList=new ArrayList<>(20);
             for (Course c:
@@ -56,7 +63,7 @@ public class ProfessorController {
             model.addAttribute("canOpenWeekStrsList",canOpenWeekStrsList);
             model.addAttribute("courses",courses);
             model.addAttribute("coursesCanOpen",coursesCanOpen);
-            return "teacher";
+            return "teacher/teacher";
         }
     }
 }

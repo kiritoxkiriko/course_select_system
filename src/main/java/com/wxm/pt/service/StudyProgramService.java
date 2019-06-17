@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Alex Wang
@@ -52,8 +53,8 @@ public class StudyProgramService {
             System.out.println("!canAdd");
             return false;
         }
-        List<Course> primaryCourse = studyProgram.getPrimaryCourses();
-        List<Course> secondaryCourse = studyProgram.getSecondaryCourses();
+        Set<Course> primaryCourse = studyProgram.getPrimaryCourses();
+        Set<Course> secondaryCourse = studyProgram.getSecondaryCourses();
         if(primaryCourse.contains(course)||secondaryCourse.contains(course)){
             System.out.println("reAdd");
             return false;
@@ -81,7 +82,7 @@ public class StudyProgramService {
         if (!courses.contains(course)) {
             return false;
         }
-        List<Course> primaryCourse = studyProgram.getPrimaryCourses();
+        Set<Course> primaryCourse = studyProgram.getPrimaryCourses();
         if (!primaryCourse.remove(course)) {
             return false;
         }
@@ -100,7 +101,7 @@ public class StudyProgramService {
         if (!courses.contains(course)) {
             return false;
         }
-        List<Course> secondaryCourses = studyProgram.getSecondaryCourses();
+        Set<Course> secondaryCourses = studyProgram.getSecondaryCourses();
         if (!secondaryCourses.remove(course)) {
             return false;
         }
@@ -121,8 +122,8 @@ public class StudyProgramService {
             System.out.println("!canAdd");
             return false;
         }
-        List<Course> secondaryCourses = studyProgram.getSecondaryCourses();
-        List<Course> primaryCourses=studyProgram.getPrimaryCourses();
+        Set<Course> secondaryCourses = studyProgram.getSecondaryCourses();
+        Set<Course> primaryCourses=studyProgram.getPrimaryCourses();
         if(secondaryCourses.contains(course)||primaryCourses.contains(course)){
             System.out.println("reAdd");
             return false;
@@ -154,8 +155,8 @@ public class StudyProgramService {
         if (!studyProgram.isSubmit()) {
             return false;
         }
-        List<Course> primaryCourses = studyProgram.getPrimaryCourses();
-        List<Course> secondaryCourses = studyProgram.getSecondaryCourses();
+        Set<Course> primaryCourses = studyProgram.getPrimaryCourses();
+        Set<Course> secondaryCourses = studyProgram.getSecondaryCourses();
         List<Course> tempList=new ArrayList<>();//临时list，因为遍历时不能修改
         for (Course c
                 : primaryCourses) {
@@ -188,7 +189,7 @@ public class StudyProgramService {
     }
 
     public synchronized boolean canAddPrimaryCourse(StudyProgram studyProgram) {
-        List<Course> courses = studyProgram.getPrimaryCourses();
+        Set<Course> courses = studyProgram.getPrimaryCourses();
         return courses.size() < studyProgram.getCourseOffering().getMaxSelectNum();
     }
 
@@ -196,7 +197,7 @@ public class StudyProgramService {
         if (studyProgram.isSubmit()) {
             return false;
         }
-        List<Course> courses = studyProgram.getSecondaryCourses();
+        Set<Course> courses = studyProgram.getSecondaryCourses();
         return courses.size() < MAX_SECONDARY_COURSE_NUM;
     }
 

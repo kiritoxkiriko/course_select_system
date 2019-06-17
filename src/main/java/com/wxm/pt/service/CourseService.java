@@ -17,7 +17,7 @@ import java.util.List;
 public class CourseService {
     public static final int MAX_SELECT_NUM = 10;
     public static final int MIN_SELECT_NUM = 3;
-    private final String[] weeks={"周一","周二","周三","周四","周五","周六","周日"};
+    public static final String[] weeks={"周一","周二","周三","周四","周五","周六","周日"};
     @Autowired
     private StudentDao studentDao;
     @Autowired
@@ -47,23 +47,25 @@ public class CourseService {
         return this.isCollide(course,courses);
     }
     public boolean isCollide(Course course, Iterable<Course> courses){
+        String[] strs2=course.getDaysOfWeek().split(" ");
         for (Course c:
                 courses) {
-            if(c.getBeginWeek()<=course.getBeginWeek()||c.getFinishWeek()>=course.getFinishWeek()){
+            if(!(c.getBeginWeek()>course.getFinishWeek()||c.getFinishWeek()<course.getBeginWeek())){
                 String[] strs1=c.getDaysOfWeek().split(" ");
-                String[] strs2=course.getDaysOfWeek().split(" ");
                 //判断周数是否重合
+                boolean flag=false;
                 for (String s1:
                      strs1) {
                     for (String s2:
                         strs2){
-                        if(strs1.equals(strs2)){
-                            return true;
+                        if(s1.equals(s2)){
+                            flag=true;
+                            break;
                         }
                     }
                 }
-                if(c.getDaysOfWeek()==course.getDaysOfWeek()){
-                    if(c.getBeginTime()<=course.getBeginTime()||c.getFinishTime()<=course.getFinishTime()){
+                if(flag){
+                    if(!(c.getBeginTime()>course.getFinishTime()||c.getFinishTime()<course.getBeginTime())){
                         return true;
                     }
                 }
@@ -84,9 +86,22 @@ public class CourseService {
         }else {
             for(String s:strs){
                 int a=Integer.parseInt(s);
-                result.add(weeks[a]);
+                result.add(weeks[a-1]);
             }
         }
         return result;
     }
+    public List<Integer> getDaysOfWeekNums(Course course){
+        List<Integer> result=new ArrayList<>();
+        String[] strs=course.getDaysOfWeek().split(" ");
+        if (strs.length<=0){
+        }else {
+            for(String s:strs){
+                int a=Integer.parseInt(s);
+                result.add(a);
+            }
+        }
+        return result;
+    }
+
 }

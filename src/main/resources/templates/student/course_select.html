@@ -53,8 +53,8 @@
                         <ul class="nav side-menu">
                             <li><a><i class="fa fa-home"></i> 选课系统 <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
+                                    <li><a href="" th:text="课程计划-+${courseOffering.degree.name}"></a></li>
                                     <li><a href="/student">课程计划</a></li>
-                                    <li><a href="" th:text="${courseOffering.degree.name}"></a></li>
                                 </ul>
                             </li>
 
@@ -114,6 +114,7 @@
                     <div class="title_left">
                         <h3>选课系统</h3>
                     </div>
+                    <a class="btn btn-default" th:if="${studyProgram.isSubmit()}" th:href="@{~/student/courseScheme(studyProgramId=${studyProgram.id})}">查看课表</a>
                     <button type="button" th:unless="${studyProgram.submit}" class="btn-submit btn btn-primary" style="float: right">提交</button>
                     <button type="button" th:if="${studyProgram.submit}" class="btn btn-default disabled" style="float: right">已提交</button>
                 </div>
@@ -145,7 +146,6 @@
                                         <th class="col-md-1">周次</th>
                                         <th class="col-md-2">时间</th>
                                         <th class="col-md-1">学分</th>
-                                        <th class="col-md-1">费用</th>
                                         <th class="col-md-1">已选/全部</th>
                                         <th class="col-md-2">操作</th>
                                     </tr>
@@ -197,9 +197,8 @@
                                         <th class="col-md-1" th:text="${c.beginWeek+'-'+c.finishWeek+' 周'}"></th>
                                         <th class="col-md-2"><span th:each="str:${weekStrsList.get(cStat.index)}"
                                                                    th:text="${str+' '}"></span><span
-                                                th:text="${c.beginWeek+'-'+c.finishWeek+' 节'}"></span></th>
+                                                th:text="${c.beginTime+'-'+c.finishTime+' 节'}"></span></th>
                                         <th class="col-md-1" th:text="${c.score}"></th>
-                                        <th class="col-md-1" th:text="${c.price}"></th>
                                         <td class="project_progress">
                                             <div class="progress progress_sm">
                                                 <div class="progress-bar bg-green" role="progressbar"
@@ -249,7 +248,6 @@
                                         <th class="col-md-1">周次</th>
                                         <th class="col-md-2">时间</th>
                                         <th class="col-md-1">学分</th>
-                                        <th class="col-md-1">费用</th>
                                         <th class="col-md-1">已选/全部</th>
                                         <th class="col-md-2">操作</th>
                                     </tr>
@@ -301,9 +299,8 @@
                                         <th class="col-md-1" th:text="${c.beginWeek+'-'+c.finishWeek+' 周'}"></th>
                                         <th class="col-md-2"><span th:each="str:${weekStrsList.get(cStat.index)}"
                                                                    th:text="${str+' '}"></span><span
-                                                th:text="${c.beginWeek+'-'+c.finishWeek+' 节'}"></span></th>
+                                                th:text="${c.beginTime+'-'+c.finishTime+' 节'}"></span></th>
                                         <th class="col-md-1" th:text="${c.score}"></th>
-                                        <th class="col-md-1" th:text="${c.price}"></th>
                                         <td class="project_progress">
                                             <div class="progress progress_sm">
                                                 <div class="progress-bar bg-green" role="progressbar"
@@ -350,7 +347,6 @@
                                         <th class="col-md-1">周次</th>
                                         <th class="col-md-2">时间</th>
                                         <th class="col-md-1">学分</th>
-                                        <th class="col-md-1">费用</th>
                                         <th class="col-md-1">已选/全部</th>
                                         <th class="col-md-2">操作</th>
                                     </tr>
@@ -402,9 +398,8 @@
                                         <th class="col-md-1" th:text="${c.beginWeek+'-'+c.finishWeek+' 周'}"></th>
                                         <th class="col-md-2"><span th:each="str:${weekStrsList.get(cStat.index)}"
                                                                    th:text="${str+' '}"></span><span
-                                                th:text="${c.beginWeek+'-'+c.finishWeek+' 节'}"></span></th>
+                                                th:text="${c.beginTime+'-'+c.finishTime+' 节'}"></span></th>
                                         <th class="col-md-1" th:text="${c.score}"></th>
-                                        <th class="col-md-1" th:text="${c.price}"></th>
                                         <td class="project_progress">
                                             <div class="progress progress_sm">
                                                 <div class="progress-bar bg-green" role="progressbar"

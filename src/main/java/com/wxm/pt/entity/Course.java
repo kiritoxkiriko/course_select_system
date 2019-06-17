@@ -53,6 +53,8 @@ public class Course {
     @Column
     @NotNull
     private int finishTime;
+    @Column
+    private String location;
 
     public Course() {
     }
@@ -183,6 +185,18 @@ public class Course {
 
     public void setTotalNum(int totalNum) {
         this.totalNum = totalNum;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Course(String location) {
+        this.location = location;
     }
 
     @Override

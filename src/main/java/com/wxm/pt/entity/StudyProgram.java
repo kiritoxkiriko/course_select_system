@@ -2,9 +2,9 @@ package com.wxm.pt.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 /**
  * @author Alex Wang
@@ -21,19 +21,18 @@ public class StudyProgram {
     @NotNull
     private CourseOffering courseOffering;
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Course> primaryCourses=new ArrayList<>();
+    private Set<Course> primaryCourses=new ConcurrentSkipListSet<>();
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Course> secondaryCourses=new ArrayList<>();
-    @Column
+    private Set<Course> secondaryCourses=new ConcurrentSkipListSet<>();
     @NotNull
     private boolean submit=false;
+
+    public StudyProgram() {
+    }
 
     public StudyProgram(Student student, @NotNull CourseOffering courseOffering) {
         this.student = student;
         this.courseOffering = courseOffering;
-    }
-
-    public StudyProgram() {
     }
 
     public long getId() {
@@ -60,19 +59,19 @@ public class StudyProgram {
         this.courseOffering = courseOffering;
     }
 
-    public List<Course> getPrimaryCourses() {
+    public Set<Course> getPrimaryCourses() {
         return primaryCourses;
     }
 
-    public void setPrimaryCourses(List<Course> primaryCourses) {
+    public void setPrimaryCourses(Set<Course> primaryCourses) {
         this.primaryCourses = primaryCourses;
     }
 
-    public List<Course> getSecondaryCourses() {
+    public Set<Course> getSecondaryCourses() {
         return secondaryCourses;
     }
 
-    public void setSecondaryCourses(List<Course> secondaryCourses) {
+    public void setSecondaryCourses(Set<Course> secondaryCourses) {
         this.secondaryCourses = secondaryCourses;
     }
 
@@ -95,17 +94,5 @@ public class StudyProgram {
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "StudyProgram{" +
-                "id=" + id +
-                ", student=" + student +
-                ", courseOffering=" + courseOffering +
-                ", primaryCourses=" + primaryCourses +
-                ", secondaryCourses=" + secondaryCourses +
-                ", submit=" + submit +
-                '}';
     }
 }

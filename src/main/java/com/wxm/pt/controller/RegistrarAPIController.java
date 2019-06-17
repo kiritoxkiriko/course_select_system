@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
  * @date 2019/05/14
  */
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/registrar")
 public class RegistrarAPIController {
     @Autowired
     private StudentService studentService;
@@ -29,7 +29,7 @@ public class RegistrarAPIController {
     @Autowired
     private CollegeService collegeService;
 
-    @RequestMapping(value = "student/add",method = RequestMethod.POST)
+    @RequestMapping(value = "/student/add",method = RequestMethod.POST)
     public boolean addStudent(HttpSession session, @RequestParam("id")long id, @RequestParam("name")String name,@RequestParam("pwd")String pwd, @RequestParam("college_id")long collegeId){
         Registrar registrar=verify(session);
         if(registrar==null){
@@ -41,7 +41,7 @@ public class RegistrarAPIController {
         }
         return studentService.add(id,name,pwd,college)!=null;
     }
-    @RequestMapping(value = "professor/add",method = RequestMethod.POST)
+    @RequestMapping(value = "/professor/add",method = RequestMethod.POST)
     public boolean addProfessor(HttpSession session, @RequestParam("id")long id, @RequestParam("name")String name,@RequestParam("pwd")String pwd, @RequestParam("college_id")long collegeId){
         Registrar registrar=verify(session);
         if(registrar==null){
@@ -53,7 +53,7 @@ public class RegistrarAPIController {
         }
         return professorService.add(id,name,pwd,college)!=null;
     }
-    @RequestMapping("student/remove")
+    @RequestMapping("/student/remove")
     public boolean removeStudent(HttpSession session,@RequestParam("id")long studentId){
         Registrar registrar=verify(session);
         if(registrar==null){
@@ -62,7 +62,7 @@ public class RegistrarAPIController {
         return studentService.remove(studentId);
     }
 
-    @RequestMapping("professor/remove")
+    @RequestMapping("/professor/remove")
     public boolean removeProfessor(HttpSession session,@RequestParam("id")long professorId){
         Registrar registrar=verify(session);
         if(registrar==null){
@@ -71,7 +71,7 @@ public class RegistrarAPIController {
         return professorService.remove(professorId);
     }
 
-    @RequestMapping("student/modify")
+    @RequestMapping("/student/modify")
     public boolean modifyStudent(HttpSession session,@RequestParam("id")long id, @RequestParam("name")String name,@RequestParam("pwd")String pwd, @RequestParam("college_id")long collegeId){
         Registrar registrar=verify(session);
         if(registrar==null){
@@ -88,7 +88,7 @@ public class RegistrarAPIController {
         student.setPassword(pwd);
         return studentService.modify(student)!=null;
     }
-    @RequestMapping("professor/modify")
+    @RequestMapping("/professor/modify")
     public boolean modifyProfessor(HttpSession session,@RequestParam("id")long id, @RequestParam("name")String name,@RequestParam("pwd")String pwd, @RequestParam("college_id")long collegeId){
         Registrar registrar=verify(session);
         if(registrar==null){
