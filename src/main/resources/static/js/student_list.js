@@ -1,7 +1,7 @@
 $(".btn-enter").click(function () {
-    var student=$(this).parent().parent()
-    var score=$("#input-score").val()
-    var student_id=$(".student").attr("student_id")
+    var student=$(this).parent()
+    var score=student.children("#input-score").val()
+    var student_id=student.attr("student_id")
     var course_id=$(".main").attr("course_id")
     $.ajax({
             async: false,
@@ -18,7 +18,7 @@ $(".btn-enter").click(function () {
                 if(!data){
                     alert("添加失败")
                 }else{
-                   // window.location.reload()
+                   window.location.reload()
                 }
             },
             url: "/api/courseInfo/add",
@@ -27,17 +27,20 @@ $(".btn-enter").click(function () {
 })
 
 $(".btn-modify").click(function () {
-    var elem1="<input type=\"number\" id=\"input-score\" placeholder=\"输入成绩\" style=\"width: 80px\">"
+    var student=$(this).parent()
+    var elem1="<input type=\"number\" style=\"margin-right: 10px;width: 80px\" id=\"input-score\" placeholder=\"输入成绩\" >"
     var elem2="<button class=\"btn btn-success btn-submit btn-xs\">提交</button>"
-    $(".btn-modify").remove()
-    $(".score").remove()
-    $(".th-score").append(elem1)
-    $(".th-score").append(elem2)
+    student.children(".btn-modify").remove()
+    student.children(".score").remove()
+    student.append(elem1)
+    student.append(elem2)
 })
 
-$(".btn-submit").click(function () {
-    var score=$("#input-score").val()
-    var student_id=$(".student").attr("student_id")
+$(document).on("click",".btn-submit",function () {
+    console.log("提交按钮被点击")
+    var student=$(this).parent()
+    var score=student.children("#input-score").val()
+    var student_id=student.attr("student_id")
     var course_id=$(".main").attr("course_id")
     $.ajax({
             async: false,

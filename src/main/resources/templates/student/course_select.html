@@ -249,6 +249,7 @@
                                         <th class="col-md-2">时间</th>
                                         <th class="col-md-1">学分</th>
                                         <th class="col-md-1">已选/全部</th>
+                                        <th class="col-md-1">分数</th>
                                         <th class="col-md-2">操作</th>
                                     </tr>
                                     </thead>
@@ -308,6 +309,8 @@
                                             </div>
                                             <small th:text="${c.selectNum+'/'+c.totalNum}"></small>
                                         </td>
+                                        <th class="col-md-1">
+                                        </th>
                                         <th class="col-md-2" style="">
                                             <button th:if="${courseOffering.status==1&&studyProgram.submit==false}"
                                                     th:course_id="${c.id}" type="button"

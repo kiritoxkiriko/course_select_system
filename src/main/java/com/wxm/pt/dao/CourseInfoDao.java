@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public interface CourseInfoDao extends JpaRepository<CourseInfo,Long> {
     public CourseInfo findCourseInfoByCourseAndStudent(Course course, Student student);
-    public CourseInfo findCourseInfoByCourseIdAndStudentId(long courseId,long studentId);
+    public CourseInfo findCourseInfoByCourse_IdAndStudent_Id(long courseId, long studentId);
     public List<CourseInfo> findCourseInfosByCourse(Course course);
-    public List<CourseInfo> findCourseInfosByCourseId(long courseId);
+    public List<CourseInfo> findCourseInfosByCourse_Id(long courseId);
 }

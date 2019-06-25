@@ -23,7 +23,7 @@ public class CourseInfoService {
         return courseInfoDao.findCourseInfoByCourseAndStudent(course,student);
     }
     public synchronized CourseInfo getCourseInforByCourseIdAndStudentId(long courseId,long studentId){
-        return courseInfoDao.findCourseInfoByCourseIdAndStudentId(courseId, studentId);
+        return courseInfoDao.findCourseInfoByCourse_IdAndStudent_Id(courseId, studentId);
     }
     public synchronized Map<Student,CourseInfo> getCourseInfoMapByCourse(Course course){
         Map<Student,CourseInfo> courseInfoMap=new ConcurrentHashMap<>();
@@ -35,7 +35,7 @@ public class CourseInfoService {
     }
     public synchronized Map<Course,CourseInfo> getCourseInfoMapByCourseId(long courseId){
         Map<Course,CourseInfo> courseInfoMap=new ConcurrentHashMap<>();
-        List<CourseInfo> courseInfos=courseInfoDao.findCourseInfosByCourseId(courseId);
+        List<CourseInfo> courseInfos=courseInfoDao.findCourseInfosByCourse_Id(courseId);
         for(CourseInfo ci:courseInfos){
             courseInfoMap.put(ci.getCourse(),ci);
         }

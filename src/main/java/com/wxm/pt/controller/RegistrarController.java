@@ -43,6 +43,6 @@ public class RegistrarController {
         model.addAttribute("professors",professors);
         model.addAttribute(registrar);
         System.out.println(colleges);
-        return "registrar";
+        return "admin/admin";
     }
 }

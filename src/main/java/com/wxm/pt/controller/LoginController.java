@@ -24,7 +24,7 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
     @AutoJump
-    @RequestMapping(value = {"","login","index"},method = RequestMethod.GET)
+    @RequestMapping(value = {"","login","index","index.html"},method = RequestMethod.GET)
     public String login(Model model,HttpSession session){
         return "login";
 //        return login(model,session,1,"admin","registrar");

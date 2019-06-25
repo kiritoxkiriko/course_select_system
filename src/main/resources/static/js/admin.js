@@ -18,7 +18,7 @@ $("#form-stu").submit(function (e) {
                     window.location.reload()
                 }
             },
-            url: "/api/student/add",
+            url: "/api/registrar/student/add",
         }
     )
     return false;
@@ -43,7 +43,7 @@ $("#form-pro").submit(function (e) {
                     window.location.reload()
                 }
             },
-            url: "/api/professor/add",
+            url: "/api/registrar/professor/add",
         }
     )
     return false;
@@ -68,7 +68,7 @@ $(".btn-stu-delete").click(function () {
                     window.location.reload()
                 }
             },
-            url: "/api/student/remove",
+            url: "/api/registrar/student/remove",
         }
     )
 })
@@ -92,7 +92,47 @@ $(".btn-pro-delete").click(function () {
                     window.location.reload()
                 }
             },
-            url: "/api/professor/remove",
+            url: "/api/registrar/professor/remove",
         }
     )
+})
+$(".btn-stu-modify").click(function () {
+    var parent=$(this).parent().parent()
+    var id=parent.find(".id").text()
+    var name=parent.find(".name").text()
+    var password=parent.find(".password").text()
+    var college=parent.find(".college").attr("college_id")
+    var parent=$("#form-stu").parent()
+    parent.find("input[name='id']").val(id)
+    parent.find("input[name='name']").val(name)
+    parent.find("input[name='pwd']").val(password)
+    parent.find(".option-stu").each(function () {
+        var collegeId=$(this).val()
+        if(collegeId==college){
+            $(this).attr("selected","selected")
+        }else {
+            $(this).removeAttr("selected")
+        }
+    })
+
+})
+$(".btn-pro-modify").click(function () {
+    var parent=$(this).parent().parent()
+    var id=parent.find(".id").text()
+    var name=parent.find(".name").text()
+    var password=parent.find(".password").text()
+    var college=parent.find(".college").attr("college_id")
+    var parent=$("#form-pro").parent()
+    parent.find("input[name='id']").val(id)
+    parent.find("input[name='name']").val(name)
+    parent.find("input[name='pwd']").val(password)
+    parent.find(".option-pro").each(function () {
+        var collegeId=$(this).val()
+        if(collegeId==college){
+            $(this).attr("selected","selected")
+        }else {
+            $(this).removeAttr("selected")
+        }
+    })
+
 })

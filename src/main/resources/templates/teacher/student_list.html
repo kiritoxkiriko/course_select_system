@@ -128,11 +128,11 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="student" th:each="s:${students}" th:student_id="${s.id}">
+                                    <tr class="student" th:each="s:${students}">
                                         <th th:text="${s.id}"></th>
                                         <th th:text="${s.name}"></th>
                                         <th th:text="${s.college.name}"></th>
-                                        <th class="th-score">
+                                        <th class="th-score" th:student_id="${s.id}">
                                             <span style="margin-right: 10px" class="score" id="score" th:if="${courseInfoMap.containsKey(s)}" th:text="${courseInfoMap.get(s).score}"></span>
                                             <input th:unless="${courseInfoMap.containsKey(s)}" type="number" id="input-score" placeholder="输入成绩" style="width: 80px">
                                             <button th:unless="${courseInfoMap.containsKey(s)}" class="btn btn-warning btn-enter btn-xs">录入</button>

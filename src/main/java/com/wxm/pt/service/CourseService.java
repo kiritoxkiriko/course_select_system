@@ -1,11 +1,13 @@
 package com.wxm.pt.service;
 
 import com.wxm.pt.dao.*;
+import com.wxm.pt.entity.College;
 import com.wxm.pt.entity.Course;
 import com.wxm.pt.entity.Professor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,6 +104,28 @@ public class CourseService {
             }
         }
         return result;
+    }
+
+    public Course addCourse(College college, Professor professor, String name, double score, int totalNum, int beginWeek, int finishWeek,String daysOfWeek, int beginTime,int finishTime){
+        if(courseDao.countByName(name)>0){
+            return null;
+        }
+        Course course=new Course(college,professor,name,score,null,totalNum,0,beginWeek,finishWeek,daysOfWeek,beginTime,finishTime);
+        return courseDao.save(course);
+    }
+
+    public Course modifyCourse(Course course){
+        return courseDao.save(course);
+    }
+
+    public boolean deleteCourse(Course course){
+        try {
+            courseDao.delete(course);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
 }

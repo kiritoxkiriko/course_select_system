@@ -13,6 +13,7 @@ import java.util.List;
  */
 @Repository
 public interface CourseDao extends JpaRepository<Course,Long> {
+    public long countByName(String name);
     public List<Course> findCoursesByProfessor(Professor professor);
     public List<Course> findCoursesByProfessorAndSelectNumGreaterThan(Professor professor, int min);
 }

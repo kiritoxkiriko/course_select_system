@@ -1,10 +1,8 @@
 package com.wxm.pt.controller;
 
 import com.wxm.pt.annotation.TeacherLoginRequire;
-import com.wxm.pt.entity.Course;
-import com.wxm.pt.entity.CourseInfo;
-import com.wxm.pt.entity.Professor;
-import com.wxm.pt.entity.Student;
+import com.wxm.pt.entity.*;
+import com.wxm.pt.service.CollegeService;
 import com.wxm.pt.service.CourseInfoService;
 import com.wxm.pt.service.CourseService;
 import com.wxm.pt.service.StudentService;
@@ -32,6 +30,8 @@ public class ProfessorController {
     private StudentService studentService;
     @Autowired
     private CourseInfoService courseInfoService;
+    @Autowired
+    private CollegeService collegeService;
 
     @TeacherLoginRequire
     @RequestMapping("")
@@ -65,5 +65,15 @@ public class ProfessorController {
             model.addAttribute("coursesCanOpen",coursesCanOpen);
             return "teacher/teacher";
         }
+    }
+    @TeacherLoginRequire
+    @RequestMapping("/add")
+    public String add(HttpSession session,Model model){
+        Professor professor= (Professor) session.getAttribute("user");
+        model.addAttribute("professor",professor);
+        List<College> colleges=collegeService.getAllColleges();
+        model.addAttribute("colleges",colleges);
+        model.addAttribute("weekStrs",CourseService.weeks);
+        return "teacher/add_course";
     }
 }

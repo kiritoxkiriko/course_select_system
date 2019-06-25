@@ -29,7 +29,9 @@ public class StudentController {
     @Autowired
     private CourseOfferingService courseOfferingService;
     @Autowired
-    CourseService courseService;
+    private CourseService courseService;
+    @Autowired
+    private CourseInfoService courseInfoService;
 //    @Autowired
 //    CollegeService collegeService;
     @StudentLoginRequire
@@ -52,7 +54,12 @@ public class StudentController {
             model.addAttribute(studyProgram);
             return "student/course_select";
         }else{
+            List<StudyProgram> studyPrograms=new ArrayList<>();
             model.addAttribute(courseOfferings);
+            for (CourseOffering co:courseOfferings){
+                studyPrograms.add(studyProgramService.getByStudentAndCourseOffering(student,co));
+            }
+            model.addAttribute("studyPrograms",studyPrograms);
             return "student/student";
         }
     }

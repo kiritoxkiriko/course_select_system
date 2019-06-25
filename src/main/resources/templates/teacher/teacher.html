@@ -54,6 +54,7 @@
                             <li><a><i class="fa fa-home"></i> 教师系统 <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="/professor">教师课程</a></li>
+                                    <li><a href="/professor/add">添加课程</a></li>
                                 </ul>
                             </li>
 
@@ -150,6 +151,7 @@
                                             <small th:text="${c.selectNum+'/'+c.totalNum}"></small>
                                         </td>
                                         <th class="col-md-2">
+                                            <button class="btn btn-danger btn-delete" th:courseId="${c.id}">删除</button>
                                         </th>
                                     </tr>
                                     </tbody>
@@ -241,5 +243,6 @@
 
                 <!-- Custom Theme Scripts -->
                 <script src="/build/js/custom.min.js"></script>
+                <script src="/js/teacher.js"></script>
 </body>
 </html>
