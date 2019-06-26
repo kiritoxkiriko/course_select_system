@@ -1,0 +1,5 @@
+# course_select_system
+选课系统
+先用mysql创建名为course_select_system的数据库
+再运行Exc4ApplicationTests既可生成数据库
+直接运行Exc4Application即可启动项目
