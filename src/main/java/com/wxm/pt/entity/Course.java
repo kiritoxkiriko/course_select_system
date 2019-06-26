@@ -59,7 +59,7 @@ public class Course {
     public Course() {
     }
 
-    public Course(@NotNull College college, @NotNull Professor professor, @NotNull String name, @NotNull double score, List<Course> requireCourses, @NotNull int totalNum, @NotNull double price, @NotNull int beginWeek, @NotNull int finishWeek, @NotNull String daysOfWeek, @NotNull int beginTime, @NotNull int finishTime) {
+    public Course(@NotNull College college, @NotNull Professor professor, @NotNull String name, @NotNull double score, List<Course> requireCourses, @NotNull int totalNum, @NotNull double price, @NotNull int beginWeek, @NotNull int finishWeek, @NotNull String daysOfWeek, @NotNull int beginTime, @NotNull int finishTime,String location) {
         this.college = college;
         this.professor = professor;
         this.name = name;
@@ -72,6 +72,7 @@ public class Course {
         this.daysOfWeek = daysOfWeek;
         this.beginTime = beginTime;
         this.finishTime = finishTime;
+        this.location=location;
     }
 
     public long getId() {

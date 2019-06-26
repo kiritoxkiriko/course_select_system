@@ -106,11 +106,11 @@ public class CourseService {
         return result;
     }
 
-    public Course addCourse(College college, Professor professor, String name, double score, int totalNum, int beginWeek, int finishWeek,String daysOfWeek, int beginTime,int finishTime){
+    public Course addCourse(College college, Professor professor, String name, double score, int totalNum, int beginWeek, int finishWeek,String daysOfWeek, int beginTime,int finishTime,String location){
         if(courseDao.countByName(name)>0){
             return null;
         }
-        Course course=new Course(college,professor,name,score,null,totalNum,0,beginWeek,finishWeek,daysOfWeek,beginTime,finishTime);
+        Course course=new Course(college,professor,name,score,null,totalNum,0,beginWeek,finishWeek,daysOfWeek,beginTime,finishTime,location);
         return courseDao.save(course);
     }
 
@@ -126,6 +126,10 @@ public class CourseService {
             return false;
         }
         return true;
+    }
+
+    public List<Course> getAll(){
+        return courseDao.findAll();
     }
 
 }

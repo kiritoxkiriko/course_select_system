@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>教师页面</title>
+    <title>管理页面</title>
 
     <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -40,7 +40,7 @@
                     </div>
                     <div class="profile_info">
                         <span>欢迎,</span>
-                        <h2 th:text="${professor.name}"></h2>
+                        <h2 th:text="${registrar.name}"></h2>
                     </div>
                 </div>
                 <!-- /menu profile quick info -->
@@ -53,8 +53,8 @@
                         <ul class="nav side-menu">
                             <li><a><i class="fa fa-home"></i> 教师系统 <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="/professor">教师课程</a></li>
-                                    <li><a href="/professor/add">添加课程</a></li>
+                                    <li><a href="/registrar">老师学生管理</a></li>
+                                    <li><a href="/registrar/courseList">课程管理</a></li>
                                 </ul>
                             </li>
 
@@ -79,7 +79,7 @@
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                aria-expanded="false">
-                                <img src="/images/logo.png" alt="" th:text="${professor.name}">
+                                <img src="/images/logo.png" alt="" th:text="${registrar.name}">
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -106,7 +106,7 @@
                     <div class="col-md-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>您的课程</h2>
+                                <h2>所有课程</h2>
                                 <ul class="nav navbar-right panel_toolbox" style="min-width: 24px;">
                                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                     </li>
@@ -154,65 +154,7 @@
                                         </td>
                                         <th class="col-md-2">
                                             <button class="btn btn-danger btn-delete" th:courseId="${c.id}">删除</button>
-                                        </th>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <!-- end project list -->
-
-                            </div>
-                        </div>
-
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>需要教学的课程</h2>
-                                <ul class="nav navbar-right panel_toolbox" style="min-width: 24px;">
-                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                    </li>
-                                </ul>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
-                                <p>您有<span th:text="${coursesCanOpen.size()}"></span>个课程即将开始</p>
-                                <!-- start project list -->
-                                <table class="table table-striped projects">
-                                    <thead>
-                                    <tr>
-                                        <th style="width: 1%">#</th>
-                                        <th class="col-md-2">课程名称</th>
-                                        <th class="col-md-1">专业</th>
-                                        <th class="col-md-1">讲师</th>
-                                        <th class="col-md-1">周次</th>
-                                        <th class="col-md-2">时间</th>
-                                        <th class="col-md-1">学分</th>
-                                        <th class="col-md-1">地点</th>
-                                        <th class="col-md-1">已选/全部</th>
-                                        <th class="col-md-2">操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr th:each="c:${coursesCanOpen}">
-                                        <th th:text="${cStat.index+1}"></th>
-                                        <th class="col-md-2" th:text="${c.name}"></th>
-                                        <th class="col-md-1" th:text="${c.college.name}"></th>
-                                        <th class="col-md-1" th:text="${c.professor.name}"></th>
-                                        <th class="col-md-1" th:text="${c.beginWeek+'-'+c.finishWeek+' 周'}"></th>
-                                        <th class="col-md-2"><span th:each="str:${canOpenWeekStrsList.get(cStat.index)}"
-                                                                   th:text="${str+' '}"></span><span
-                                                th:text="${c.beginTime+'-'+c.finishTime+' 节'}"></span></th>
-                                        <th class="col-md-1" th:text="${c.score}"></th>
-                                        <th class="col-md-1" th:text="${c.location}"></th>
-                                        <td class="project_progress">
-                                            <div class="progress progress_sm">
-                                                <div class="progress-bar bg-green" role="progressbar"
-                                                     th:data-transitiongoal="${c.selectNum*100/c.totalNum}"></div>
-                                            </div>
-                                            <small th:text="${c.selectNum+'/'+c.totalNum}"></small>
-                                        </td>
-
-                                        <th class="col-md-2">
-                                            <a class="btn btn-primary btn-small" th:href="@{~/professor(co_pos=${cStat.index})}">查看学生</a>
+                                            <a class="btn btn-primary btn-modify" th:courseId="${c.id}" th:href="@{~/registrar/courseModify/{courseId}(courseId=${c.id})}">修改</a>
                                         </th>
                                     </tr>
                                     </tbody>
@@ -247,6 +189,6 @@
 
                 <!-- Custom Theme Scripts -->
                 <script src="/build/js/custom.min.js"></script>
-                <script src="/js/teacher.js"></script>
+                <script src="/js/course_list.js"></script>
 </body>
 </html>

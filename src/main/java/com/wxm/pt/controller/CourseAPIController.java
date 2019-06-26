@@ -29,7 +29,7 @@ public class CourseAPIController {
     private CollegeService collegeService;
 
     @RequestMapping("/add")
-    public boolean add(HttpSession session,@RequestParam(required = false) Long professorId,@RequestParam String name,@RequestParam int beginWeek,@RequestParam int finishWeek,@RequestParam int beginTime,@RequestParam int finishTime,@RequestParam int totalNum,@RequestParam String daysOfWeek,@RequestParam double score){
+    public boolean add(HttpSession session,@RequestParam(required = false) Long professorId,@RequestParam String name,@RequestParam int beginWeek,@RequestParam int finishWeek,@RequestParam int beginTime,@RequestParam int finishTime,@RequestParam int totalNum,@RequestParam String daysOfWeek,@RequestParam double score,@RequestParam String location){
         Professor professor=null;
         if(professorId==null){
             professor= verifyProfessor(session);
@@ -49,7 +49,7 @@ public class CourseAPIController {
             System.out.println("courseReAdd");
             return false;
         }
-        return courseService.addCourse(college,professor,name,score,totalNum,beginWeek,finishWeek,daysOfWeek,beginTime,finishTime)!=null;
+        return courseService.addCourse(college,professor,name,score,totalNum,beginWeek,finishWeek,daysOfWeek,beginTime,finishTime,location)!=null;
     }
 
     @RequestMapping("/modify")
