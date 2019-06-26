@@ -49,13 +49,16 @@ public class Exc4ApplicationTests {
         college=collegeDao.saveAndFlush(college);
         Degree degree=new Degree("大一",college);
         degree=degreeDao.save(degree);
+
         List<Student> students=new ArrayList<>();
         students.add(studentService.add(111,"王刚","123456",college));
         students.add(studentService.add(222,"李强","123456",college));
         students.add(studentService.add(333,"刘建华","123456",college));
         students.add(studentService.add(444,"赵四","123456",college));
         Professor professor=professorService.add(111,"滑稽","123456",college);
+        Registrar registrar=registrarDao.save(new Registrar(111,"admin","admin"));
         //
+
         List<Course> courses=new ArrayList<>();
         courses.add(new Course(college,professor,"高等数学",6,null,10,10,1,16,"1 3",1,2,null));
         courses.add(new Course(college,professor,"线性代数",6,null,10,10,1,16,"1 3",1,2,null));
@@ -69,11 +72,11 @@ public class Exc4ApplicationTests {
         courses1.add(courseService.getCourseById(1));
         courses.add(new Course(college,professor,"数据库1",6,courses,10,10,1,16,"1 3",3,4,null));
         courseDao.saveAll(courses);
-        //        courses=courseDao.findAll();
-        //
         Time time=new Time(System.currentTimeMillis()+1000*60*10);//当前时间+10min
         CourseOffering courseOffering=new CourseOffering(degree,courses,time);
         courseOffering=courseOfferingDao.save(courseOffering);
+        //        courses=courseDao.findAll();
+        //
         //
         Student student1=students.get(0);
         System.out.println(student1);

@@ -153,8 +153,8 @@
                                             <small th:text="${c.selectNum+'/'+c.totalNum}"></small>
                                         </td>
                                         <th class="col-md-2">
-                                            <button class="btn btn-danger btn-delete" th:courseId="${c.id}">删除</button>
                                             <a class="btn btn-primary btn-modify" th:courseId="${c.id}" th:href="@{~/registrar/courseModify/{courseId}(courseId=${c.id})}">修改</a>
+                                            <button class="btn btn-danger btn-delete" th:courseId="${c.id}">删除</button>
                                         </th>
                                     </tr>
                                     </tbody>

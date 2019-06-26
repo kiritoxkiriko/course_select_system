@@ -3,6 +3,7 @@ package com.wxm.pt.service;
 import com.wxm.pt.dao.*;
 import com.wxm.pt.entity.College;
 import com.wxm.pt.entity.Course;
+import com.wxm.pt.entity.CourseOffering;
 import com.wxm.pt.entity.Professor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -111,7 +112,16 @@ public class CourseService {
             return null;
         }
         Course course=new Course(college,professor,name,score,null,totalNum,0,beginWeek,finishWeek,daysOfWeek,beginTime,finishTime,location);
-        return courseDao.save(course);
+        List<CourseOffering> courseOfferings=courseOfferingDao.findAll();
+        CourseOffering courseOffering=courseOfferings.get(0);
+        if((course=courseDao.save(course))==null){
+            return null;
+        }
+        courseOffering.getCourses().add(course);
+        if(courseOfferingDao.save(courseOffering)==null){
+            return null;
+        }
+        return course;
     }
 
     public Course modifyCourse(Course course){
@@ -119,7 +129,12 @@ public class CourseService {
     }
 
     public boolean deleteCourse(Course course){
-        try {
+        try {List<CourseOffering> courseOfferings=courseOfferingDao.findAll();
+            CourseOffering courseOffering=courseOfferings.get(0);
+            courseOffering.getCourses().remove(course);
+            if(courseOfferingDao.save(courseOffering)==null){
+                return false;
+            }
             courseDao.delete(course);
         } catch (Exception e) {
             e.printStackTrace();

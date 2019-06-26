@@ -135,14 +135,18 @@
                                             <span>第 </span>
                                             <select id="beginWeek" name="beginWeek" class="select2_single form-control "
                                                     tabindex="-1">
-                                                <option th:each="i:${#numbers.sequence(1,20)}" th:value="${i}"
+                                                <option th:if="${i==1}" th:each="i:${#numbers.sequence(1,20)}" selected="selected" th:value="${i}"
+                                                        th:text="${i}"></option>
+                                                <option th:unless="${i==1}" th:each="i:${#numbers.sequence(1,20)}" th:value="${i}"
                                                         th:text="${i}"></option>
                                             </select>
                                             <span>周 - 第 </span>
                                             <select id="finishWeek" name="finishWeek"
                                                     class="select2_single form-control " tabindex="-1">
-                                                <option th:each="i:${#numbers.sequence(1,20)}" th:value="${i}"
-                                                        th:text="${i}" th:selected="${i==20}?'selected':''"></option>
+                                                <option th:if="${i==18}" th:each="i:${#numbers.sequence(1,20)}" selected="selected" th:value="${i}"
+                                                        th:text="${i}"></option>
+                                                <option th:unless="${i==18}" th:each="i:${#numbers.sequence(1,20)}" th:value="${i}"
+                                                        th:text="${i}"></option>
                                             </select>
                                             <span> 周</span>
                                         </div>
@@ -155,13 +159,17 @@
                                             <span>第 </span>
                                             <select id="beginTime" name="beginTime" class="select2_single form-control "
                                                     tabindex="-1">
-                                                <option th:each="i:${#numbers.sequence(1,10)}" th:value="${i}"
+                                                <option th:if="${i==1}" th:each="i:${#numbers.sequence(1,10)}" selected="selected" th:value="${i}"
+                                                        th:text="${i}"></option>
+                                                <option th:unless="${i==1}" th:each="i:${#numbers.sequence(1,10)}" th:value="${i}"
                                                         th:text="${i}"></option>
                                             </select>
                                             <span>节 - 第 </span>
                                             <select id="finishTime" name="finishTime"
                                                     class="select2_single form-control " tabindex="-1">
-                                                <option th:each="i:${#numbers.sequence(1,10)}" th:selected="${i==2}?'selected':''" th:value="${i}"
+                                                <option th:if="${i==2}" th:each="i:${#numbers.sequence(1,10)}" selected="selected" th:value="${i}"
+                                                        th:text="${i}"></option>
+                                                <option th:unless="${i==2}" th:each="i:${#numbers.sequence(1,20)}" th:value="${i}"
                                                         th:text="${i}"></option>
                                             </select>
                                             <span> 节</span>

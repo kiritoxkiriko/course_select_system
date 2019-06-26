@@ -45,7 +45,6 @@ public class RegistrarController {
         model.addAttribute("students",students);
         model.addAttribute("professors",professors);
         model.addAttribute(registrar);
-        System.out.println(colleges);
         return "admin/admin";
     }
 
@@ -65,7 +64,6 @@ public class RegistrarController {
         model.addAttribute("colleges",colleges);
         model.addAttribute("courses",courses);
         model.addAttribute(registrar);
-        System.out.println(colleges);
         return "admin/course_list";
     }
 
